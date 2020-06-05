@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">KotLineapp</string>
+    <string name="username_hint">Username</string>
+    <string name="e_mail_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="register_button_text">REGISTER</string>
+    <string name="already_have_an_account_button_text">Already have an account?</string>
+    <string name="login_button_text">LOGIN</string>
+    <string name="new_user_button_text">New User?</string>
+    <string name="select_photo_button_text">Select Photo</string>
+    <string name="sign_out_menu_text">Sign Out</string>
+    <string name="new_messages_menu_text">New Messages</string>
+    <string name="enter_message_hint">Enter Message</string>
+    <string name="send_button_text">SEND</string>
+    <string name="message_chat_row">This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.</string>
+</resources>

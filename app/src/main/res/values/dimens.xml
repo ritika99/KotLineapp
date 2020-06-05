@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_edit">16dp</dimen>
+    <dimen name="margin_vertical_edit">16dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="padding_message">8dp</dimen>
+</resources>
