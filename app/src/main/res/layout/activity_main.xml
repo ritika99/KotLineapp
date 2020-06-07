@@ -20,6 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo_image_register"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:layout_constraintBottom_toBottomOf="@+id/photo_button_register"
+        app:layout_constraintEnd_toEndOf="@+id/photo_button_register"
+        app:layout_constraintStart_toStartOf="@+id/photo_button_register"
+        app:layout_constraintTop_toTopOf="@+id/photo_button_register" />
+
     <EditText
         android:id="@+id/username_edit_register"
         style="@style/whiteboxEdit"
