@@ -23,6 +23,8 @@ class ChatLogActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<ViewHolder>()
 
+    var fromUser: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
@@ -34,9 +36,9 @@ class ChatLogActivity : AppCompatActivity() {
 
 //        supportActionBar?.title = "Chat Log"
 //        val user = intent.getStringExtra(NewMessagesActivity.USER_KEY)
-        val user = intent.getParcelableExtra<User>(NewMessagesActivity.USER_KEY)
+        fromUser = intent.getParcelableExtra<User>(NewMessagesActivity.USER_KEY)
 
-        supportActionBar?.title = user.username
+        supportActionBar?.title = fromUser?.username
 
 //        dummyData()
 
@@ -48,7 +50,9 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages(){
-        val reference = database.getReference("/messages")
+        val fromId = fromUser?.uid
+        val toId = auth.uid
+        val reference = database.getReference("/user-messages/$toId/$fromId")
         reference.addChildEventListener(object: ChildEventListener {
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -57,13 +61,14 @@ class ChatLogActivity : AppCompatActivity() {
                 if (chatMessage != null) {
 
                     if (chatMessage.toId == auth.uid) {
+//                        var loginUser = LatestMessagesActivity.loginUser ?: return
                         adapter.add(ChatToItem(chatMessage.text))
                     }
                     else {
-                        adapter.add(ChatFromItem(chatMessage.text))
+                        adapter.add(ChatFromItem(chatMessage.text, fromUser!!))
                     }
                 }
-
+                recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -94,20 +99,39 @@ class ChatLogActivity : AppCompatActivity() {
 
         if (toId == null) return
 
-        val reference = database.getReference("/messages").push()
+//        val reference = database.getReference("/messages").push()
+        val reference = database.getReference("/user-messages/$toId/$fromId").push()
+
+        val fromReference = database.getReference("/user-messages/$fromId/$toId").push()
 
         val chatMessage = ChatMessage(reference.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
+
         reference.setValue(chatMessage)
             .addOnSuccessListener {
-
+                enter_message_edit_chatlog.setText("")
+                recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
             }
+
+        fromReference.setValue(chatMessage)
+
+        val lastestMessageReference = database.getReference("/latest-messages/$toId/$fromId")
+        lastestMessageReference.setValue(chatMessage)
+
+        val lastestMessageFromReference = database.getReference("/latest-messages/$fromId/$toId")
+        lastestMessageFromReference.setValue(chatMessage)
+
+
     }
 
 }
 
-class ChatFromItem(val text: String): Item<ViewHolder>(){
+class ChatFromItem(val text: String, val user: User): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.chat_from_message_text.text = text
+
+        val uri = user.profilePicUrl
+        val profilePic = viewHolder.itemView.chat_from_profile_image
+        Picasso.get().load(uri).into(profilePic)
 
     }
     override fun getLayout(): Int = R.layout.chat_from_row
@@ -117,6 +141,9 @@ class ChatToItem(val text: String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.chat_to_message_text.text = text
 
+//        val uri = user.profilePicUrl
+//        val profilePic = viewHolder.itemView.chat_to_profile_image
+//        Picasso.get().load(uri).into(profilePic)
     }
     override fun getLayout(): Int = R.layout.chat_to_row
 }

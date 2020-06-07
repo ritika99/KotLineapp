@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/chat_from_profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -24,7 +23,7 @@
         android:padding="@dimen/padding_message"
         android:maxWidth="240dp"
         android:background="@drawable/rounded_edittext"
-        android:text="This is a message This is a meThis is a message This is a message ssage This is a message This is a message This is a message This is a message This is a message"
+        android:text="@string/dummy_text_chat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/chat_from_profile_image"

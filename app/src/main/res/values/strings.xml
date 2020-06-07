@@ -14,4 +14,5 @@
     <string name="enter_message_hint">Enter Message</string>
     <string name="send_button_text">SEND</string>
     <string name="message_chat_row">This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.This is a message.</string>
+    <string name="dummy_text_chat">This is a message This is a meThis is a message This is a message ssage This is a message This is a message This is a message This is a message This is a message</string>
 </resources>
