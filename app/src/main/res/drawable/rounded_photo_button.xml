@@ -3,5 +3,5 @@
     <size android:height="128dp"/>
     <size android:width="128dp"/>
     <corners android:radius="128dp"/>
-    <solid android:color="@color/dark_blue_background_button"/>
+    <solid android:color="@color/background_layout"/>
 </shape>
