@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatLogActivity"
-    android:background="@color/background_layout">
+    android:background="@android:color/white">
 
     <EditText
         android:id="@+id/enter_message_edit_chatlog"
@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/background_layout"
+        android:background="@drawable/chat_bg"
         app:layout_constraintBottom_toTopOf="@+id/enter_message_edit_chatlog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
